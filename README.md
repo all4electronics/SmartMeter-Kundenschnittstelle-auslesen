@@ -12,7 +12,8 @@ Deshalb hier mein Lösungsvorschlag:
 Zunächst sollte man den Schlüssel zum Entschlüsseln der Daten von der EVN beantragen. Wie in dem oben genannten Dokument angegeben, müssen Sie nur eine E-Mail mit Ihrer Kundennummer, Zählernummer und Telefonnummer an smartmeter@netz-noe.at senden.
 
 Der M-Bus Anschluss in form einer RJ12 Buchse befindet sich hinter der grünen Klappe an der Front des Zählers. Das SmartMeter sendet Daten alle 5 Sekunden, indem es die Spannung zwischen beiden M-Bus-Leitungen von 36 V (1) auf 24 V (0) mit einer Baudrate von 2400 ändert.
-Daher ist ein Pegelwandler notwendig der 36V->5V und 24V->0V umwandelt. Danach kann der Arduino die Daten über UART einlesen. In meinem Fall musste ich nur den Ausgang des Level-Shifter an Pin 19 (RX1) meines Atmega2560 anschließen. Mit Serial.read() konnte ich dann die verschlüsselten Daten vom Zähler einlesen.
+Daher ist ein Pegelwandler notwendig der 36V->5V und 24V->0V umwandelt. Danach kann der Arduino die Daten über UART einlesen. In meinem Fall musste ich nur den Ausgang des Pegelwandlers an Pin 19 (RX1) meines Atmega2560 anschließen. Mit Serial.read() konnte ich dann die verschlüsselten Daten vom Zähler einlesen.
+Bei Verwendung eines anderen Microncontrollers können die Daten auch per Software mit der Bibliothek SoftwareSerial eingelesen werden.   
 
 --Pegelwandler--
 
