@@ -1,4 +1,4 @@
-# EVN Kundenschnittstelle auslesen SMART METER
+# EVN Kundenschnittstelle auslesen (SMART METER)
 ENGLISH TRANSLATION AT THE BOTTOM!
 
 Mit dieser Anleitung möchte ich zeigen, wie man Daten von den SmartMetern, die in ganz Niederösterreich installiert wurden, auf die EINFACHSTE und wahrscheinlich GÜNSTIGSTE ART UND WEISE auslesen kann.
@@ -14,12 +14,12 @@ Zunächst sollte man den Schlüssel zum Entschlüsseln der Daten von der EVN bea
 Der M-Bus Anschluss in form einer RJ12 Buchse befindet sich hinter der grünen Klappe an der Front des Zählers. Das SmartMeter sendet Daten alle 5 Sekunden, indem es die Spannung zwischen beiden M-Bus-Leitungen von 36 V (1) auf 24 V (0) mit einer Baudrate von 2400 ändert.
 Daher ist ein Pegelwandler notwendig der 36V->5V und 24V->0V umwandelt. Danach kann der Arduino die Daten über UART einlesen. In meinem Fall musste ich nur den Ausgang des Level-Shifter an Pin 19 (RX1) meines Atmega2560 anschließen. Mit Serial.read() konnte ich dann die verschlüsselten Daten vom Zähler einlesen.
 
---Pegelwandler--
+#--Pegelwandler--
 Circuit_Mbus.pdf
 Um einen Verpolungsschutz hinzuzufügen, habe ich einen Brückengleichrichter am Eingang hinzugefügt.
 K1A erzeugt eine stabile Referenzspannung für den Schmitt-Trigger, der mit K1B realisiert wurde. Die Referenzspannung sollte mit dem Trimmer R7 auf etwa 2,5 V eingestellt werden. Durch Ändern der Referenzspannung können Sie die Schaltschwelle nach oben und unten verschieben. Die Hysterese ist auf etwa 1 V eingestellt. Sie können die Werte gerne neu berechnen oder eine bessere Lösung für den Pegelwandler finden. Für mich funktioniert die Schaltung einwandfrei, nachdem ich sie auf die Schaltpunkte 27V und 28V eingestellt habe.
 
---Entschlüsselung--
+#--Entschlüsselung--
 Ich habe eine wunderbare Beschreibung gefunden, wie die AES128-GCM-Verschlüsselung funktioniert.
 https://www.weigu.lu/tutorials/sensors2bus/04_encryption/index.html
 Mit folgender Bibliothek und einem Teil des oben genannten Programms konnte ich die Daten erfolgreich entschlüsseln:
