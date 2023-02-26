@@ -15,11 +15,13 @@ Der M-Bus Anschluss in form einer RJ12 Buchse befindet sich hinter der grünen K
 Daher ist ein Pegelwandler notwendig der 36V->5V und 24V->0V umwandelt. Danach kann der Arduino die Daten über UART einlesen. In meinem Fall musste ich nur den Ausgang des Level-Shifter an Pin 19 (RX1) meines Atmega2560 anschließen. Mit Serial.read() konnte ich dann die verschlüsselten Daten vom Zähler einlesen.
 
 --Pegelwandler--
+
 Circuit_Mbus.pdf
 Um einen Verpolungsschutz hinzuzufügen, habe ich einen Brückengleichrichter am Eingang hinzugefügt.
 K1A erzeugt eine stabile Referenzspannung für den Schmitt-Trigger, der mit K1B realisiert wurde. Die Referenzspannung sollte mit dem Trimmer R7 auf etwa 2,5 V eingestellt werden. Durch Ändern der Referenzspannung können Sie die Schaltschwelle nach oben und unten verschieben. Die Hysterese ist auf etwa 1 V eingestellt. Sie können die Werte gerne neu berechnen oder eine bessere Lösung für den Pegelwandler finden. Für mich funktioniert die Schaltung einwandfrei, nachdem ich sie auf die Schaltpunkte 27V und 28V eingestellt habe.
 
 --Entschlüsselung--
+
 Ich habe eine wunderbare Beschreibung gefunden, wie die AES128-GCM-Verschlüsselung funktioniert.
 https://www.weigu.lu/tutorials/sensors2bus/04_encryption/index.html
 Mit folgender Bibliothek und einem Teil des oben genannten Programms konnte ich die Daten erfolgreich entschlüsseln:
@@ -40,11 +42,13 @@ All you need is a level converter which converts 36V->5V and 24V->0V. After that
 
 
 --LEVEL CONVERTER-- 
+
 Circuit_Mbus.pdf
 In order to add reverse polarity protection I added a full bridge rectivier at the input.
 K1A creates stable reference voltage for the schmitttrigger built with K1B. The reference voltage should be tuned to around 2,5V using the trimmer R7. By changing the reference voltage, you can shift the switching threshold up and down, the hysteresis is set to around 1V. Feel free to recalculate it or even find a better solution for the level converter. For me the circuit works perfectly after i tuned it to have its switching points at roughly 27V and 28V. 
 
 --Decyphering--
+
 I found a wonderful description about how the AES128-GCM Encryption works.
 https://www.weigu.lu/tutorials/sensors2bus/04_encryption/index.html
 Using the following library and part of the bevore mentioned code I was able to successfully decipher the data:
