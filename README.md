@@ -28,6 +28,9 @@ https://www.weigu.lu/tutorials/sensors2bus/04_encryption/index.html
 Mit folgender Bibliothek und einem Teil des oben genannten Programms konnte ich die Daten erfolgreich entschlüsseln:
 https://github.com/rweather/arduinolibs/tree/master/libraries/Crypto (Sie müssen NUR die "Crypto" -Bibliothek im "Library" Ordner installieren).
 
+Die Programmdatei EVN_SmartMeter beinhaltet nur die Einlesung, Entschlüsselung und Ausgabe der Daten am Seriellen Monitor.
+Die Programmdatei EVN_SmartMeter_ArduinoMega_LCD umfasst zudem eine Ausgabe der aktuellen Daten auf einem 20x4 LCD Display (mit I2C Schnittstelle) und eine Ausgabe der jeweiligen Energieeinspeisung und  Energiebezug vom Netz (Wh) bis zu ein Monat zurück (im EEPROM gespeichert). 
+
 
 This tutorial shows you how to read data from the SmartMeters, which have been installed all over lower Austria, in the SIMPLEST and probably CHEAPEST POSSIBLE WAY.
 
